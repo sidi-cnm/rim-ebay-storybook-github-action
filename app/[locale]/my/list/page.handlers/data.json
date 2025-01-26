@@ -1,0 +1,67 @@
+{
+  "totalPages": 4,
+  "annonces": [
+    {
+      "id": 1,
+      "typeAnnonceId": 2,
+      "typeAnnonceName": "Vente",
+      "typeAnnonceNameAr": "بيع",
+      "categorieId": 5,
+      "categorieName": "Immobilier",
+      "categorieNameAr": "عقارات",
+      "lieuId": 10,
+      "lieuStr": "Nouakchott",
+      "lieuStrAr": "نواكشوط",
+      "userId": 20,
+      "title": "Appartement à vendre",
+      "description": "Un bel appartement à vendre avec vue sur la mer.",
+      "price": 50000,
+      "contact": "+22212345678",
+      "haveImage": false,
+      "firstImagePath": "",
+      "images": [],
+      "status": "actif",
+      "updatedAt": "2024-10-01T10:15:30.000Z",
+      "createdAt":  "2023-09-01T12:00:00Z"
+    }
+    ,
+    {
+      "id": 2,
+      "typeAnnonceId": 2,
+      "typeAnnonceName": "Vente",
+      "typeAnnonceNameAr": "بيع",
+      "categorieId": 5,
+      "categorieName": "Immobilier",
+      "categorieNameAr": "عقارات",
+      "lieuId": 10,
+      "lieuStr": "Nouakchott",
+      "lieuStrAr": "نواكشوط",
+      "userId": 20,
+      "title": "Appartement à vendre",
+      "description": "Un bel appartement à vendre avec vue sur la mer.",
+      "price": 50000,
+      "contact": "+22212345678",
+      "haveImage": true,
+      "firstImagePath": "/id/1/200/300",
+      "images": [
+        {
+          "id": 1,
+          "imagePath": "/id/3/200/300"
+        },
+        {
+          "id": 2,
+          "imagePath": "/id/5/200/300"
+        },
+        {
+          "id": 3,
+          "imagePath": "/id/7/200/300"
+        }
+      ],
+      "status": "actif",
+      "updatedAt": "2024-10-01T10:15:30.000Z",
+      "createdAt":  "2023-09-01T12:00:00Z"
+    }
+    
+   
+  ]
+}

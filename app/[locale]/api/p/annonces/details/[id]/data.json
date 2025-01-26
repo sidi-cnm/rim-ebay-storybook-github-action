@@ -1,0 +1,14 @@
+{
+  "id": 2,
+  "typeAnnonce":"vente",
+  "categorie": "Immobilier",
+  "title": "Appartement à louer à Nouakchott",
+  "description": "Appartement à louer à Nouakchott",
+  "lieu_str": "Nouakchott, Mauritanie",
+  "image_url": "",
+  "price": 50000,
+  "HaveImage": false,
+  "firstImagePath": "",
+  "images": [],
+  "created_at": "2023-09-01T12:00:00Z"
+}

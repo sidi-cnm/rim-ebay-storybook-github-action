@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "username": "john_doe",
+      "telephone": "010-1234567",
+      "etat": "Actif",
+      "derniereConnexion": "2024-11-13 14:30"
+    },
+    {
+      "id": 2,
+      "username": "jane_smith",
+      "telephone": "010-7654321",
+      "etat": "Inactif",
+      "derniereConnexion": "2024-11-10 10:20"
+    },
+    {
+      "id": 3,
+      "username": "paul_lee",
+      "telephone": "010-9876543",
+      "etat": "Actif",
+      "derniereConnexion": "2024-11-12 08:10"
+    }
+  ]
+  

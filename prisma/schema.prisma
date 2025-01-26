@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  lastLogin DateTime? @db.Timestamptz
+  isActive  Boolean   @default(true)
+  sessions  UserSession[]
+  annonces  Annonce[]
+}
+
+model UserSession {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  token       String
+  isExpired   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  lastAccessed DateTime? @db.Timestamptz
+
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+
+model TypeAnnonce {
+  id        Int       @id @default(autoincrement())
+  name      String
+  nameAr    String
+  priority  Int
+  createdAt DateTime  @default(now())
+  categories Category[]
+  annonces  Annonce[]
+}
+
+
+model Category {
+  id           Int           @id @default(autoincrement())
+  typeAnnonceId Int
+  name         String
+  nameAr       String 
+  priority     Int
+  createdAt    DateTime     @default(now())
+
+  typeAnnonce  TypeAnnonce  @relation(fields: [typeAnnonceId], references: [id])
+  annonces     Annonce[]
+  subCategories SubCategory[]
+}
+
+
+model SubCategory {
+  id          Int      @id @default(autoincrement())
+  name        String
+  nameAr      String
+  categorieId Int
+  priority    Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  category    Category @relation(fields: [categorieId], references: [id])
+}
+
+
+model Image {
+  id        Int       @id @default(autoincrement())
+  imagePath String
+  createdAt DateTime? @default(now())
+  altText   String?
+
+  annonces  Annonce[] @relation("AnnonceImages")
+}
+
+
+model Wilaya {
+  id        Int       @id @default(autoincrement())
+  name      String
+  nameAr    String
+  priority  Int
+  lieux     Lieu[]
+}
+
+
+model Moughataa {
+  id        Int       @id @default(autoincrement())
+  name      String
+  nameAr    String
+  priority  Int
+  lieux     Lieu[]
+}
+
+
+model GPSLocation {
+  id        Int      @id @default(autoincrement())
+  latitude  Float
+  longitude Float
+  lieux     Lieu[]
+}
+
+
+model Lieu {
+  id           Int         @id @default(autoincrement())
+  wilayaId     Int
+  moughataaId  Int?
+  gpsLocationId Int?
+  
+  wilaya       Wilaya?     @relation(fields: [wilayaId], references: [id])
+  moughataa    Moughataa?  @relation(fields: [moughataaId], references: [id])
+  gpsLocation  GPSLocation? @relation(fields: [gpsLocationId], references: [id])
+  
+  annonces     Annonce[]
+}
+
+
+model Annonce {
+  id                Int       @id @default(autoincrement())
+  typeAnnonceId     Int
+  categorieId       Int
+  lieuId            Int
+  userId            Int
+  subcategorieId    Int
+  title             String
+  description       String
+  price             Float
+  contact           String
+  haveImage         Boolean   @default(false)
+  firstImagePath    String
+  status            String
+  updatedAt         DateTime  @default(now()) @updatedAt
+  createdAt         DateTime  @default(now())
+
+  typeAnnonce       TypeAnnonce @relation(fields: [typeAnnonceId], references: [id])
+  categorie         Category    @relation(fields: [categorieId], references: [id])
+  lieu              Lieu        @relation(fields: [lieuId], references: [id])
+  user              User        @relation(fields: [userId], references: [id])
+  images            Image[]     @relation("AnnonceImages")
+}
+

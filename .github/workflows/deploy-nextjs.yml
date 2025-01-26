@@ -1,0 +1,51 @@
+name: Deploy Next.js Application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04  # ou ubuntu-24.04 selon votre préférence
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Set up environment variables
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+
+
+      # Installer Bun en utilisant l'action officielle
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 'latest'  # Vous pouvez spécifier une version spécifique si nécessaire
+
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build project
+        run: bun run build
+      - name: Start server in background
+        run: |
+          nohup bun run start &
+          sleep 10
+
+      - name: Check if index page ar is up
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/ar)
+          if [ $HTTP_STATUS -eq 200 ]; then
+            echo "✅ Application is running correctly (HTTP 200)"
+              exit 0
+            else
+              echo "❌ Application failed to start properly (HTTP $HTTP_STATUS)"
+              exit 1
+            fi
