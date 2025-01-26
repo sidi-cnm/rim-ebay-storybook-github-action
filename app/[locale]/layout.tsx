@@ -22,7 +22,18 @@ export default function RootLayout({
     }
 }>) {
  
-  const { direction: dir } = new Locale(params.locale).textInfo;
+ // const { direction: dir } = new Locale(params.locale).textInfo;
+  console.log("params.locale :")
+  console.log(params.locale)
+   let dir = 'ltr'; // Default direction
+   try {
+     if (params.locale) {
+       const locale = new Locale(params.locale);
+       dir = locale.textInfo.direction;
+     }
+   } catch (error) {
+     console.error('Invalid locale provided:', params.locale, error);
+   }
   const hasSession = cookies().has("jwt");
 
   return (

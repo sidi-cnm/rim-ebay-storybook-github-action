@@ -10,3 +10,11 @@
 - la commande bun run build = prisma generate && next build
 - prisma est optimise pour les enviroment serverless
 - storybook est configure correctement pour Nextjs 14
+
+# dockrise for dev
+vous avez besoin de podman et podman-compose installe
+
+podman-compose -f docker-compose.dev.yml up --build
+va creer une base des donnees postgres et lancer seed
+puis on lance :
+bun run dev et notre appliction est connecte a notre base des donnees local

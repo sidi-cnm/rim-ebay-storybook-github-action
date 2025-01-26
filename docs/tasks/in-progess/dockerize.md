@@ -63,4 +63,4 @@ jobs:
 
 ```
 
-je veux creer un fichier ou plusieur fichier pour la construction d'un image docker et d'executer ces images pour le dev qui necessite que les changement du code soit directement reflect, de plus je que l'image soit le plus leger possible
+je veux creer un fichier ou plusieur fichier pour la construction d'un image docker et d'executer ces images pour le dev qui necessite que les changement du code soit directement reflect, de plus je que l'image soit le plus leger possible. N.B j'utilise podman comme alernatif a docker cli
