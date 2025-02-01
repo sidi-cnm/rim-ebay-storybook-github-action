@@ -106,7 +106,7 @@ export interface Annonce {
 
   haveImage: boolean; // Indique si l'annonce a une image
   firstImagePath: string; // Chemin vers la première image liée à cette annonce
-  images: Array<{ id: number; imagePath: string }>; // Liste d'objets contenant id et imagePath
+  images?: Array<{ id: number; imagePath: string }>; // Liste d'objets contenant id et imagePath
 
   status: string; // Statut de l'annonce (ex. : actif, en attente, archivé)
   updatedAt: Date | string; // Date de la dernière mise à jour de l'annonce

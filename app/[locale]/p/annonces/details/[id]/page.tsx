@@ -1,6 +1,7 @@
-import AnnonceDetailCompo from "./ui";
+// import AnnonceDetailCompo from "./ui";
 import { handleGetOneAnnonce } from "./page.handlers/handleGetOneAnnonce";
 import  BackButton from "../../../../components/Navigation"
+import AnnonceDetailCompo from "../../../../components/All_AnnonceDetaille/AnnonceDetailUI"
 export default async function AnnonceDetail(
   { params }: { params: { id: string } },
 ) {

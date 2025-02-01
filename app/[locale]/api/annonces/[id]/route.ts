@@ -1,7 +1,7 @@
 // app/api/annonces/[id]/route.ts
 
 import { NextResponse } from 'next/server';
-import prisma from '../../../../../lib/prisma'; // Importation de l'instance Prisma
+import prisma from '@/lib/prisma'; // Importation de l'instance Prisma
 
 
 // 1. Récupérer une annonce par ID (GET)

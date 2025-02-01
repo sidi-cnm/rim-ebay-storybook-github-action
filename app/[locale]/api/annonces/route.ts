@@ -1,8 +1,9 @@
 // app/api/annonces/route.ts
 
 import { NextResponse } from 'next/server';
-import prisma from '../../../../lib/prisma'; // Importation de l'instance Prisma
-
+//import prisma from '../../../../lib/prisma'; // Importation de l'instance Prisma
+import prisma from '@/lib/prisma'
+ 
 // Définition des types pour la requête
 interface CreateAnnonceRequest {
   typeAnnonceId: number;

@@ -1,10 +1,15 @@
-"use client"
 import { handleGetAnnonces } from "./page.handlers/handleGetAnnonces";
 import ListAnnoncesUI from "./ui/ListAnnoncesUI";
  
 //import InputDialog from "./components/InputDialog";
+
+//TACHES A FAIRE 
+// MOVE AnnonceItemUI  COMPONENET VERS LES COMPONENT FOLDER
+// RECUPERE LE DONNERS REEL DEPUIS LE BASE DE DEONNER
+//CREER UN STORIES
+// TESTER LE AVEC STORYBOOK
 import Input from "./components/Input";
-import AnnoceTitle from "./components/AnnoceTitle";
+// import AnnoceTitle from "./components/AnnoceTitle";
 
  
 
@@ -19,6 +24,7 @@ export default async function Home({
   // const t = useI18n();
   const currentPage = Number(searchParams?.page) || 1;
   const { pageAnnonceData, errorMessage } = await handleGetAnnonces()
+  console.log("page errorMessage" , errorMessage);
   
 
   return (
@@ -26,7 +32,7 @@ export default async function Home({
       <div className="p-5 sm:mx-16 ">
       
         <div className="flex justify-between  px-4 py-2">
-          <AnnoceTitle />
+          {/* <AnnoceTitle /> */}
           <Input />
         </div>
         
