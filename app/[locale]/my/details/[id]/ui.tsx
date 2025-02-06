@@ -130,7 +130,7 @@ export default function MyAnnonceDetailsCompo({ lang = "ar",annonceId,annonce}: 
           <div className="space-y-2 h-40 sm:h-60 w-full">
             {annonces?.haveImage ? (
               <Carousel className="rounded-xl" infiniteLoop autoPlay showThumbs={false}>
-                {annonces?.images.map((item, index) => (
+                {annonces?.images?.map((item, index) => (
                   <div className="h-40 sm:h-60" key={index}>
                     {getImage(item.imagePath)}
                   </div>

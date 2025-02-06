@@ -1,17 +1,15 @@
-"use client";
-import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
-import { Category, SubCategory, categories, subCategories } from './data';
+import React, { useState , useEffect } from "react";
+// import { AnnonceType, categories, subCategories } from '../my/add/data';
 import { useI18n } from "@/locales/client"; 
+import { useRouter } from "next/navigation";
+import { Category, SubCategory, categories, subCategories } from '../my/add/data';
 import axios from 'axios';
 import { TypeAnnonce } from "@/app/types";
 import toast, { Toaster } from 'react-hot-toast';
 import { useSearchParams } from "next/navigation";
 
-// TACHES A FAIRE 
-// CODE REDIRECT WITH LOW LATENCY 
-
-export default function AddAnnonceUI({ lang = "ar" , userid}: { lang?: string; userid: number }) {
+export default function FormSearch({lang="ar"}) {
+  
   const router = useRouter();
   const t = useI18n();
 
@@ -52,15 +50,7 @@ export default function AddAnnonceUI({ lang = "ar" , userid}: { lang?: string; u
           setCategories(response.data);
           console.log("categories : " , response.data)
 
-          // const categories = await prisma.category.findMany({
-          //   where:  {
-          //     typeAnnonceId: selectedTypeId ? selectedTypeId:undefined
-          //   } ,
-          //   orderBy: {
-          //     priority: 'asc'
-          //   }
-          // });
-            //setCategories(categories);
+         
         } catch (error) {
           console.log("error ::" , error)
           toast.error(t("errors.fetchCategories"));
@@ -124,81 +114,18 @@ export default function AddAnnonceUI({ lang = "ar" , userid}: { lang?: string; u
       setSelectedSubCategoryId(subCategoryId);
     }
   };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    const loadingToast = toast.loading(t("notifications.creating"));
-    
-    try {
-      console.log("selectedSubCategoryId" , selectedSubCategoryId)
-      const annonceData = {
-        typeAnnonceId: selectedTypeId,
-        categorieId: selectedCategoryId,
-        subcategorieId: selectedSubCategoryId,
-        lieuId: 1,
-        userId: userid,
-        title: "Titre",
-        description: description,
-        price: Number(price),
-        contact: "contact",
-        haveImage: false,
-        firstImagePath: "",
-        images: [],
-        status: "active"
-      };
-      console.log("annonceData" , annonceData)
-
-      // const response = await axios.post(`/${lang}/api/annonces`, annonceData, {
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      // });
-
-      const res = await fetch(`/${lang}/api/annonces`, {
-        method: "POST",
-        body: JSON.stringify(annonceData),
-        headers: {
-          'Content-Type': 'application/json',
-          'Cache-Control': "no-store"
-        }
-      });
-
-      if (res.status !== 200 && res.status !== 201) {
-        throw new Error('Erreur lors de la création de l\'annonce');
-      }
-
-      // toast.success(t("notifications.success"), {
-      //   id: loadingToast,
-      // });
-
-      router.push('/my/list');
-      router.refresh()
-      
-      // setTimeout(() => {
-        
-      // }, 0);
-
-    } catch (error) {
-      toast.error(t("notifications.error"), {
-        id: loadingToast,
-      });
-      console.error('Erreur:', error);
-    }
-  };
+  
 
   return (
-    <main className="min-h-screen">
-      <Toaster position="bottom-right" reverseOrder={false} />
-      
-      <div className="container mx-auto p-8">
-        <h2 className="text-3xl font-semibold mb-4 text-center text-gray-700">
-          {t("addAnnonce.addNew")}
-        </h2>
+    <div className="flex items-center justify-center h-48 bg-gray-100">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Formulaire</h2>
 
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8">
-          <div className="mb-6 relative">
-            <label htmlFor="type" className="block text-gray-700 text-sm font-bold mb-2">
+        <form>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <div className="mb-6 relative">
+            <label htmlFor="type" className="block text-gray-600 mb-2">
               {t("addAnnonce.annonceType")}
             </label>
             <select
@@ -215,9 +142,10 @@ export default function AddAnnonceUI({ lang = "ar" , userid}: { lang?: string; u
               ))}
             </select>
           </div>
+            </div>
 
-          <div className="mb-6 relative">
-            <label htmlFor="category" className="block text-gray-700 text-sm font-bold mb-2">
+            <div className="mb-6 relative">
+            <label htmlFor="category" className="block text-gray-600 mb-2">
               {t("addAnnonce.category")}
             </label>
             <select
@@ -236,8 +164,10 @@ export default function AddAnnonceUI({ lang = "ar" , userid}: { lang?: string; u
             </select>
           </div>
 
-          <div className="mb-6 relative">
-            <label htmlFor="subCategory" className="block text-gray-700 text-sm font-bold mb-2">
+            
+
+            <div className="mb-6 relative">
+            <label htmlFor="subCategory" className="block text-gray-600 mb-2">
               { t("addAnnonce.subCategory") }
             </label>
             <select
@@ -256,46 +186,30 @@ export default function AddAnnonceUI({ lang = "ar" , userid}: { lang?: string; u
             </select>
           </div>
 
-          <div className="mb-6 relative">
-            <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
-              { t("addAnnonce.description") }
-            </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="shadow-sm border rounded w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all duration-300"
-              rows={4}
-              required
-            ></textarea>
+
+            <div>
+              <label className="block text-gray-600 mb-2" htmlFor="input4">Prix</label>
+              <input
+                id="prix"
+                type="number"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+              />
+            </div>
           </div>
 
-          <div className="mb-6 relative">
-            <label htmlFor="prix" className="block text-gray-700 text-sm font-bold mb-2">
-              { t("addAnnonce.price") }
-            </label>
-            <input
-              type="number"
-              id="prix"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              className="shadow-sm border rounded w-full py-2 pl-10 pr-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all duration-300"
-              required
-            />
-          </div>
-
-          <div className="flex items-center justify-center">
-            <button
-              type="submit"
-              id="submit"
-              className="bg-blue-900 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded focus:outline-none focus:shadow-outline transition-all duration-300"
-            >
-              { t("addAnnonce.submitButton") }
-            </button>
-            {submitStatus && <p>{submitStatus}</p>}
-          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-800 text-white font-semibold py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200"
+          >
+            Envoyer
+          </button>
         </form>
       </div>
-    </main>
+    </div>
   );
 }
+
+
+
+
+
