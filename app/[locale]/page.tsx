@@ -19,12 +19,18 @@ export default async function Home({
     page?: string;
   };
 }) {
- 
-  // const t = useI18n();
+
   const currentPage = Number(searchParams?.page) || 1;
-  const { pageAnnonceData, errorMessage } = await handleGetAnnonces()
+
+  // Extract filter parameters from searchParams
+  const filter = Object.fromEntries(
+    Object.entries(searchParams || {}).filter(([key]) => key !== 'page')
+  );
+  console.log("filter" , filter)
+
+  const { pageAnnonceData, errorMessage } = await handleGetAnnonces(filter);
   console.log("page errorMessage" , errorMessage);
-  
+  console.log("pageAnnonceData :: " , pageAnnonceData);
 
   return (
     <main className="min-h-screen overflow-hidden">
@@ -39,8 +45,6 @@ export default async function Home({
           <p className="text-red-500 text-center">{errorMessage}</p>
         ) : (
           pageAnnonceData && (
-       
-                  
                      <ListAnnoncesUI
                       totalPages={pageAnnonceData.totalPages}
                       currentPage={currentPage}

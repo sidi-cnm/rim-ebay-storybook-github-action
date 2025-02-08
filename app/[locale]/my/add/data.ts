@@ -2,11 +2,37 @@
 // Définition des types
 //import { AnnonceType } from "@/app/lib/db";
 
+import { Interface } from "readline";
+
 export enum AnnonceType {
   Vente = 'Vente',
   Location = 'Location',
   Service = 'Service',
   Autre = 'autre'
+} 
+
+export interface Annonce {
+  id: number;
+  typeAnnonceId: number;
+  typeAnnonceName: string;
+  typeAnnonceNameAr: string;
+  categorieId: number;
+  categorieName: string;
+  categorieNameAr: string;
+  subcategorieId: number;
+  subcategorieName: string;
+  subcategorieNameAr: string;
+  lieuId: number;
+  lieuStr: string;
+  lieuStrAr: string;
+  userId: number;
+  title: string;
+  description: string;
+  price: number;
+  contact: string;
+  haveImage: boolean;
+  images: [];
+  createdAt: Date;
 }
 
 

@@ -1,4 +1,5 @@
 export default {
+  search:"recherche",
   nav: {
     home: "Accueil",
     myListings: "Mes annonces",
