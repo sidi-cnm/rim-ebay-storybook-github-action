@@ -86,7 +86,7 @@ export default function AnnonceDetailUI({ annonceId, annonce }: { annonceId: num
         <div className="border-t border-green-800 my-2"></div>
           <div className="flex justify-between items-center">
               <h2 className="text-lg font-bold text-gray-800 mb-1">Contact</h2>
-              <p className="text-md font-semibold text-blue-600">22 33 44 55</p>
+              <p className="text-md font-semibold text-blue-600">{annonce.contact}</p>
           </div>
           <div className="border-t border-green-800 my-2"></div>
           

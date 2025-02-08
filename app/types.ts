@@ -29,6 +29,14 @@ export interface TypeAnnonce {
   createdAt: Date; // Date de création du type d'annonce
 }
 
+// export interface SubCategory {
+//   id:number ,
+//   name :string ,
+//   nameAr:string,
+//   priority:number,
+//   createdAt:Date
+// }
+
 // Interface pour la table Categories
 export interface Category {
   id: number; // Identifiant unique
@@ -110,5 +118,5 @@ export interface Annonce {
 
   status: string; // Statut de l'annonce (ex. : actif, en attente, archivé)
   updatedAt: Date | string; // Date de la dernière mise à jour de l'annonce
-  createdAt: Date | string; // Date de création de l'annonce
+  createdAt: Date | string; // Date de création de l'annonce,
 }
